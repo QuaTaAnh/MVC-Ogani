@@ -1,8 +1,8 @@
 ﻿<!DOCTYPE html>
 <html lang="zxx">
-@{
+@*@{
     @model List<db.TLoaiSps.ToList()>
-}
+}*@
 <head>
     <meta charset="UTF-8">
     <meta name="description" content="Ogani Template">
@@ -104,7 +104,17 @@
                             <span>All departments</span>
                         </div>
                         <ul>
-                            @await Html.PartialAsync("LoaiPartial")
+                            <li><a href="#">Fresh Meat</a></li>
+                            <li><a href="#">Vegetables</a></li>
+                            <li><a href="#">Fruit & Nut Gifts</a></li>
+                            <li><a href="#">Fresh Berries</a></li>
+                            <li><a href="#">Ocean Foods</a></li>
+                            <li><a href="#">Butter & Eggs</a></li>
+                            <li><a href="#">Fastfood</a></li>
+                            <li><a href="#">Fresh Onion</a></li>
+                            <li><a href="#">Papayaya & Crisps</a></li>
+                            <li><a href="#">Oatmeal</a></li>
+                            <li><a href="#">Fresh Bananas</a></li>
                         </ul>
                     </div>
                 </div>
@@ -196,8 +206,8 @@
                         </ul>
                     </div>
                 </div>
-            </div>
             @RenderBody();
+            </div>
         </div>
     </section>
     <section class="latest-product spad">
