@@ -1,7 +1,15 @@
+using Microsoft.EntityFrameworkCore;
+using WebNo3.Models;
+using WebNo3.Repository;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+var connectionString = builder.Configuration.GetConnectionString("QlbanVaLiContext"); 
+builder.Services.AddDbContext<QlbanVaLiContext>(x=>x.UseSqlServer(connectionString));
+
+builder.Services.AddScoped<ILoaiSpRepository, CLoaiSpRepository>();
 
 var app = builder.Build();
 
