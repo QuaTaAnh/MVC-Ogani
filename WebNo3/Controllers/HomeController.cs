@@ -37,6 +37,12 @@ namespace WebNo3.Controllers
             return View(lst);
         }
 
+        public IActionResult ChiTietSanPham(string masp)
+        {
+            TDanhMucSp sanpham = db.TDanhMucSps.SingleOrDefault(x=>x.MaSp== masp);
+            return View(sanpham);
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
