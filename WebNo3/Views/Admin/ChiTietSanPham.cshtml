@@ -1,0 +1,92 @@
+﻿@*@model IEnumerable<WebNo3.Models.TDanhMucSp>*@
+
+@{
+    ViewData["Title"] = "ChiTietSanPham";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@model List<TDanhMucSp>
+
+<h1>ChiTietSanPham</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Ten sp
+            </th>
+            <th>
+                NganLapTop
+            </th>
+            <th>
+                CanNang
+            </th>
+            <th>
+                DoNoi
+            </th>
+            <th>
+                ThoiGianBaoHanh
+            </th>
+            <th>
+                GioiThieuSp
+            </th>
+            <th>
+                ChietKhau
+            </th>
+            <th>
+                AnhDaiDien
+            </th>
+            <th>
+                GiaNhoNhat
+            </th>
+            <th>
+                GiaLonNhat
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TenSp)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NganLapTop)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CanNang)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DoNoi)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ThoiGianBaoHanh)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GioiThieuSp)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ChietKhau)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AnhDaiDien)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GiaNhoNhat)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GiaLonNhat)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.MaSp">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.MaSp">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.MaSp">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

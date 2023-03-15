@@ -13,7 +13,7 @@
 
 @*Nút chuyển trang*@
 <div class="product__pagination">
-    @Html.PagedListPager(Model, page => Url.Action("Index", new{page=page, 
+    @Html.PagedListPager(Model, page => Url.Action("SanPhamTheoLoai", new{page=page, 
     maloai=@ViewBag.maloai}))
 </div>
 

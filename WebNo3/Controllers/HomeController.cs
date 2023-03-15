@@ -26,11 +26,11 @@ namespace WebNo3.Controllers
             PagedList<TDanhMucSp> lst = new PagedList<TDanhMucSp>(lstSanPham, pageNumber, pageSize);
             return View(lst);
         }
-        public IActionResult SanPhamTheoLoai(string maloai, int page=1)
+        public IActionResult SanPhamTheoLoai(string maloai, int? page)
         {
             int pageSize = 8;
-            int pageNumber = page;
-            var lstSanPham = db.TDanhMucSps.Where(x => x.MaLoai == maloai).AsNoTracking().OrderBy(x => x.MaSp);
+            int pageNumber = page == null || page <= 0 ? 1 : page.Value;
+            var lstSanPham = db.TDanhMucSps.AsNoTracking().Where(x => x.MaLoai == maloai).OrderBy(x => x.MaSp);
 
             PagedList<TDanhMucSp> lst = new PagedList<TDanhMucSp>(lstSanPham, pageNumber, pageSize);
             ViewBag.maloai = maloai;
@@ -42,6 +42,14 @@ namespace WebNo3.Controllers
             TDanhMucSp sanpham = db.TDanhMucSps.SingleOrDefault(x=>x.MaSp== masp);
             return View(sanpham);
         }
+        public IActionResult SanPhamDetail(string masp)
+        {
+            var product = db.TDanhMucSps.FirstOrDefault(x=>x.MaSp== masp);
+            var lstAnhSanPham = db.TAnhSps.Where(x=>x.MaSp== masp).ToList();
+            ViewBag.lstAnhSanPham = lstAnhSanPham;
+            return View(product);  
+        }
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
