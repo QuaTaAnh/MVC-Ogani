@@ -1,4 +1,4 @@
-﻿@*@model IEnumerable<WebNo3.Models.TDanhMucSp>*@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
 @{
     ViewData["Title"] = "DanhMucSanPham";
@@ -11,11 +11,11 @@
 <h1>DanhMucSanPham</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-controller="Admin" asp-action="themSanPham">Create New</a>
 </p>
 <table class="table">
     <thead>
-        <tr>
+        <tr class="table-info">
             <th>
                 Tên sản phẩm
             </th>
@@ -35,8 +35,21 @@
         </tr>
     </thead>
     <tbody>
+        @{
+            var count = 1;
+            string bgc = "";
+        }
 @foreach (var item in Model) {
-        <tr>
+            if(count % 2 == 1)
+            {
+            bgc = "table-danger";
+            }
+            else
+            {
+            bgc = "table-success";
+            }
+            count++;
+            <tr class="@bgc">
             <td>
             <a asp-controller="Admin" asp-action="ChiTietSanPham" asp-route-maSp="@item.MaSp">
                 @Html.DisplayFor(modelItem => item.TenSp)
@@ -55,7 +68,7 @@
                 @Html.DisplayFor(modelItem => item.GiaLonNhat)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.MaSp">Edit</a> |
+                <a asp-controller="Admin" asp-action="SuaSanPham" asp-route-maSanPham="@item.MaSp">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.MaSp">Details</a> |
                 <a asp-action="Delete" asp-route-id="@item.MaSp">Delete</a>
             </td>
