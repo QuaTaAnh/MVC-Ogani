@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 using WebNo3.Models;
+using WebNo3.Models.Authentication;
 using X.PagedList;
 
 namespace WebNo3.Controllers
@@ -26,6 +27,7 @@ namespace WebNo3.Controllers
             PagedList<TDanhMucSp> lst = new PagedList<TDanhMucSp>(lstSanPham, pageNumber, pageSize);
             return View(lst);
         }
+        [Authentication]
         public IActionResult SanPhamTheoLoai(string maloai, int? page)
         {
             int pageSize = 8;
@@ -36,12 +38,14 @@ namespace WebNo3.Controllers
             ViewBag.maloai = maloai;
             return View(lst);
         }
+        [Authentication]
 
         public IActionResult ChiTietSanPham(string masp)
         {
             TDanhMucSp sanpham = db.TDanhMucSps.SingleOrDefault(x=>x.MaSp== masp);
             return View(sanpham);
         }
+        [Authentication]
         public IActionResult SanPhamDetail(string masp)
         {
             var product = db.TDanhMucSps.FirstOrDefault(x=>x.MaSp== masp);
@@ -49,6 +53,7 @@ namespace WebNo3.Controllers
             ViewBag.lstAnhSanPham = lstAnhSanPham;
             return View(product);  
         }
+        [Authentication]
 
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using WebNo3.Models;
@@ -14,6 +15,7 @@ namespace WebNo3.Controllers
 		{
 			return View();
 		}
+
 		public IActionResult DanhMucSanPham(int? page)
 		{
             //Phân trang
@@ -93,6 +95,36 @@ namespace WebNo3.Controllers
                 return RedirectToAction("Index");
             }
             return View(sanpham);
+        }
+
+        [HttpGet]
+        public IActionResult Login()
+        {
+            if(HttpContext.Session.GetString("UserName") == null)
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+        }
+
+        [HttpPost]
+        public IActionResult Login(TUser user)
+        {
+            if(HttpContext.Session.GetString("UserName") == null)
+            {
+                /*var loaiUser = db.TUsers.AsNoTracking().OrderBy(x => x.LoaiUser).ToString();*/
+                var obj = db.TUsers.Where(x => x.Username == user.Username && x.Password == user.Password).FirstOrDefault();
+                if(obj != null)
+                {
+                    HttpContext.Session.SetString("UserName", obj.Username.ToString());
+                    return RedirectToAction("Index", "Home");
+                }
+            }
+            return View();
         }
     }
 }
