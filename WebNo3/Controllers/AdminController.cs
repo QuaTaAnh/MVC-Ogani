@@ -116,6 +116,7 @@ namespace WebNo3.Controllers
         {
             if(HttpContext.Session.GetString("UserName") == null)
             {
+
                 var obj = db.TUsers.Where(x => x.Username == user.Username && x.Password == user.Password).FirstOrDefault();
                 if(obj != null)
                 {
