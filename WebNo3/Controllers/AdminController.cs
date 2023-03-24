@@ -120,8 +120,16 @@ namespace WebNo3.Controllers
                 var obj = db.TUsers.Where(x => x.Username == user.Username && x.Password == user.Password).FirstOrDefault();
                 if(obj != null)
                 {
-                    HttpContext.Session.SetString("UserName", obj.Username.ToString());
-                    return RedirectToAction("Index", "Home");
+                    if(obj.LoaiUser == 0)
+                    {
+                        HttpContext.Session.SetString("UserName", obj.Username.ToString());
+                        return RedirectToAction("Index", "Home");
+                    }
+                    else
+                    {
+                        HttpContext.Session.SetString("UserName", obj.Username.ToString());
+                        return RedirectToAction("Admin", "Admin");
+                    }
                 }
             }
             return View();
