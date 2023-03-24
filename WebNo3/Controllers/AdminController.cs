@@ -126,5 +126,12 @@ namespace WebNo3.Controllers
             }
             return View();
         }
+
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Clear();
+            HttpContext.Session.Remove("UserName");
+            return RedirectToAction("Login", "Admin");
+        }
     }
 }
